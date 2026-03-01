@@ -4,7 +4,6 @@ from django.db import models
 class Roomcategory(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
-    price_per_night = models.DecimalField(max_digits=8, decimal_places=2)
     capacity = models.IntegerField(default=1)
 
     def __str__(self):
@@ -22,7 +21,7 @@ class Room(models.Model):
 
     number = models.CharField(max_length=10)
     category = models.ForeignKey(Roomcategory, on_delete=models.CASCADE, related_name='rooms')
-    block = models.IntegerField()
+    block = models.IntegerField(max_length=10)
     status = models.CharField(max_length=20, choices=ROOM_STATUS, default='available')
 
     def __str__(self):

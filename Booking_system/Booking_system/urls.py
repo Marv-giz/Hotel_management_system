@@ -16,10 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from rest_framework.routers import DefaultRouter
+from reservations.views import ReservationViewSet
+from rooms.views import RoomViewSet,RoomCategoryViewSet
+
+
+router = DefaultRouter()
+router.register(r'rooms', RoomViewSet)
+router.register(r'Reservations', ReservationViewSet)
+router.register(r'categories', RoomCategoryViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('rooms.urls')),
-    path('api/', include('reservations.urls')),
+    path('api/', include(router.urls)),   
     path('api/accounts/', include('accounts.urls')),
+    path('', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+

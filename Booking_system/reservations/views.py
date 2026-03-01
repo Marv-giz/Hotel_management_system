@@ -7,3 +7,4 @@ from .serializers import ReservationSerializer
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+
