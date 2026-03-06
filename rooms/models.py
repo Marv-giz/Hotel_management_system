@@ -21,7 +21,7 @@ class Room(models.Model):
 
     number = models.CharField(max_length=10)
     category = models.ForeignKey(Roomcategory, on_delete=models.CASCADE, related_name='rooms')
-    block = models.IntegerField(max_length=10)
+    block = models.IntegerField()
     status = models.CharField(max_length=20, choices=ROOM_STATUS, default='available')
 
     def __str__(self):
